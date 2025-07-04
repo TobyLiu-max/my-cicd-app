@@ -22,7 +22,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20.11.1' # 使用你喜欢的 Node.js 版本
-          package-manager: pnpm # 指定包管理器为 pnpm
 
       - name: Install pnpm
         run: npm install -g pnpm@9.6.0
@@ -31,6 +30,8 @@ jobs:
         run: pnpm install
 
       - name: Build project
+        env:
+          VITE_BASE_PATH: /my-cicd-app/
         run: pnpm build
 
       - name: Upload artifact
