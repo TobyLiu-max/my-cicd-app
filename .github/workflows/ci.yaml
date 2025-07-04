@@ -5,6 +5,12 @@ on:
     branches:
       - main # 触发构建的分支，通常为 main 或 master
 
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
