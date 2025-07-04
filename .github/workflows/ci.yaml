@@ -26,3 +26,9 @@ jobs:
 
       - name: Build
         run: npm run build # 编译项目
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts # 上传的产物名称
+          path: dist/ # 需要上传的目录，请根据您项目的实际输出目录修改（例如 dist/ 或 out/）
