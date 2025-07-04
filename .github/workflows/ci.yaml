@@ -18,6 +18,9 @@ jobs:
           node-version: '20.11.1' # 使用你喜欢的 Node.js 版本
           package-manager: pnpm # 指定包管理器为 pnpm
 
+      - name: Install pnpm
+        run: npm install -g pnpm@9.6.0
+
       - name: Install dependencies
         run: pnpm install
 
