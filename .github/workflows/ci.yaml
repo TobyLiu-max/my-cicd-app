@@ -1,34 +1,41 @@
-name: CI
+name: GitHub Pages
 
 on:
   push:
     branches:
-      - main # 触发条件：当代码推送到 main 分支时
-  pull_request:
-    branches:
-      - main # 触发条件：当有 PR 请求合并到 main 分支时
+      - main # 触发构建的分支，通常为 main 或 master
 
 jobs:
   build:
-    runs-on: ubuntu-latest # 使用最新的 Ubuntu 镜像
-
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2 # 检出代码
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '22.4' # 设置 Node.js 版本
+          node-version: '20.11.1' # 使用你喜欢的 Node.js 版本
+          package-manager: pnpm # 指定包管理器为 pnpm
 
       - name: Install dependencies
-        run: npm install # 安装依赖
+        run: pnpm install
 
-      - name: Build
-        run: npm run build # 编译项目
+      - name: Build project
+        run: pnpm build
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: build-artifacts # 上传的产物名称
-          path: dist/ # 需要上传的目录，请根据您项目的实际输出目录修改（例如 dist/ 或 out/）
+          path: dist # 假设你的输出目录是 dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
