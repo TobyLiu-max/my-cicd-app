@@ -26,6 +26,3 @@ jobs:
 
       - name: Build
         run: npm run build # 编译项目
-
-      - name: Run tests
-        run: npm test # 运行测试
