@@ -9,10 +9,25 @@ function App() {
 
   return (
     <>
-      <h1>Hello 琼姐</h1>
-      <a href='https://vite.dev' target='_blank'>
-        <img src={tangping} className='tangping' alt='你今天躺平了吗' />
-      </a>
+      <div
+        style={{
+          display: 'flex',
+          width: 'calc(100% - 2rem)',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <h1>Hello 琼姐</h1>
+        <div>
+          <img
+            src={tangping}
+            className='tangping'
+            alt='你今天躺平了吗'
+            style={{ maxWidth: '100%', height: 'auto' }}
+          />
+        </div>
+      </div>
+
       {/* <div>
         <a href='https://vite.dev' target='_blank'>
           <img src={viteLogo} className='logo' alt='Vite logo' />
